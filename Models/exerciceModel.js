@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 // Status Schema
-const ExerciceSchema = new mongoose.Schema({
-  name: {
+const ExerciseSchema = new mongoose.Schema({
+  Name: {
     type: String,
-    required: [true, "please enter your name "],
+    required: [true, "please enter your Name "],
   },
   Description: {
     type: String,
@@ -13,13 +13,13 @@ const ExerciceSchema = new mongoose.Schema({
     select: true,
     minlength: 2,
   },
-  Exercices: [
+  Exercises: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "Exercice",
+      ref: "exercise",
     },
   ],
 });
 
-const Exercice = mongoose.model("Exercice", ExerciceSchema);
-module.exports = Exercice;
+const exercise = mongoose.model("exercise", ExerciseSchema);
+module.exports = exercise;

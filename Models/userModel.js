@@ -5,9 +5,9 @@ const SALT_WORK_FACTOR = 10;
 
 // User Schema
 const userSchema = new mongoose.Schema({
-  name: {
+  Name: {
     type: String,
-    required: [true, "please enter your name "],
+    required: [true, "please enter your Name "],
   },
   Email: {
     type: String,
@@ -17,29 +17,29 @@ const userSchema = new mongoose.Schema({
     required: [true, "please enter your email ! "],
     validate: [validator.isEmail, "Please fill a valid email !! "],
   },
-  password: {
+  Password: {
     type: String,
     required: [true, "please enter your password "],
     minlength: 8,
     select: false,
   },
-  passwordConfirm: {
+  ConfirmPassword: {
     type: String,
     required: [true, "please confirm your password !! "],
     validate: {
       // This only works on CREATE and SAVE!!!
       validator: function (el) {
-        return el === this.MotDePasse;
+        return el === this.Password;
       },
       message: "Passwords are not the same !!",
     },
   },
-  phoneNumber: {
+  PhoneNumber: {
     type: Number,
     required: [true, "please enter your phone number !! "],
     minlength: 8,
   },
-  role: {
+  Role: {
     type: String,
     default: "client",
     enum: ["admin", "client"],
@@ -53,6 +53,16 @@ userSchema.methods.validatePassword = async function (
 ) {
   return await bcrypt.compare(condidatePassword, userPassword);
 };
+userSchema.pre("save", async function save(next) {
+  if (!this.isModified("Password")) return next();
+  try {
+    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+    this.Password = await bcrypt.hash(this.Password, salt);
+    this.ConfirmPassword = undefined;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);

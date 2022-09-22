@@ -10,43 +10,43 @@ router.post(
   GymController.addNewList
 );
 
-//Add new exercice by admin
+//Add new exercise by admin
 router.post(
-  "/Exercice",
+  "/exercise",
   authController.protect,
   authController.restrictTo("admin"),
-  GymController.addNewExercice
+  GymController.addNewExercise
 );
-//update one exercice by admin
+//update one exercise by admin
 router.patch(
   "/",
   authController.protect,
   authController.restrictTo("admin"),
-  GymController.updateOneExercice
+  GymController.updateOneExercise
 );
 
-// Liste of exercice for admin
+// List of exercise for admin
 router.get(
   "/",
   authController.protect,
   authController.restrictTo("admin", "client"),
-  GymController.findAllExercice
+  GymController.findAllExercise
 );
 
-//delete one exercice by admin
+//delete one exercise by admin
 router.delete(
-  "/:idExercice",
+  "/:idExercise",
   authController.protect,
   authController.restrictTo("admin"),
-  GymController.deleteOneExercice
+  GymController.deleteOneExercise
 );
 
-// Liste of exercice for admin
+// List of exercise for admin
 router.get(
-  "/:idExercice",
+  "/:idExercise",
   authController.protect,
   authController.restrictTo("admin", "client"),
-  GymController.getOneExercice
+  GymController.getOneExercise
 );
 
 module.exports = router;

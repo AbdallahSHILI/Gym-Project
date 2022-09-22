@@ -6,18 +6,18 @@ const userController = require("../controllers/userController");
 //create ew compte
 router.post("/signup", authController.signup);
 
-//login by adress and psw
+//login by address and psw
 router.post("/login", authController.login);
 
-//get profil by current user
+//get profile by current user
 router.get(
   "/me",
   authController.protect,
   userController.getMe,
-  userController.getUserById
+  userController.findOne
 );
 
-// Liste of all clients for admin
+// List all subscriber of Abdominal by admin
 router.get(
   "/AllClients",
   authController.protect,
@@ -30,10 +30,10 @@ router.get(
   "/:idUser",
   authController.protect,
   authController.restrictTo("admin"),
-  userController.getUserById
+  userController.findOne
 );
 
 //update user
-router.patch("/:id", authController.protect, userController.updateUser);
+router.patch("/:id", authController.protect, userController.updateProfile);
 
 module.exports = router;
