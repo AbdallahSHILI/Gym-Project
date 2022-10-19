@@ -3,7 +3,7 @@ const validator = require("validator");
 
 // Status Schema
 const abdominalSchema = new mongoose.Schema({
-  Name: {
+  ExerciseName: {
     type: String,
     required: [true, "please enter your Name "],
   },
@@ -13,12 +13,6 @@ const abdominalSchema = new mongoose.Schema({
     select: true,
     minlength: 2,
   },
-  Exercises: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "exercise",
-    },
-  ],
 });
 
 const Abdominal = mongoose.model("Abdominal", abdominalSchema);

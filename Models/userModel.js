@@ -5,9 +5,9 @@ const SALT_WORK_FACTOR = 10;
 
 // User Schema
 const userSchema = new mongoose.Schema({
-  Name: {
+  FirstLastName: {
     type: String,
-    required: [true, "please enter your Name "],
+    required: [true, "please enter your First and Last name !! "],
   },
   Email: {
     type: String,
@@ -43,6 +43,30 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "client",
     enum: ["admin", "client"],
+  },
+  SubscribeAbdominal: {
+    type: Boolean,
+    default: false,
+  },
+  SubscribeBack: {
+    type: Boolean,
+    default: false,
+  },
+  SubscribeChest: {
+    type: Boolean,
+    default: false,
+  },
+  SubscribeHand: {
+    type: Boolean,
+    default: false,
+  },
+  SubscribeLeg: {
+    type: Boolean,
+    default: false,
+  },
+  SubscribeShoulder: {
+    type: Boolean,
+    default: false,
   },
 });
 

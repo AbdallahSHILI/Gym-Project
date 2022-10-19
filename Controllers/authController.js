@@ -55,7 +55,7 @@ exports.login = async (req, res, next) => {
 exports.signup = async (req, res) => {
   try {
     const newUser = await User.create({
-      Name: req.body.Name,
+      FirstLastName: req.body.FirstLastName,
       Email: req.body.Email,
       Password: req.body.Password,
       ConfirmPassword: req.body.ConfirmPassword,
@@ -100,7 +100,7 @@ exports.protect = async (req, res, next) => {
 //restrict to admin , client
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes(req.user.Role)) {
       return res.status(401).json({
         status: "Failed",
         message: "You don't have the permission to do this action !! ",

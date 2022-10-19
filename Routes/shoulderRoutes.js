@@ -1,21 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const GymController = require("../Controllers/factory");
+const ShoulderController = require("../Controllers/shoulderController");
+const authController = require("../Controllers/authController");
 
-//Add shoulder list by admin
-router.post(
-  "/",
+//Subscribe on a list by current client
+router.patch(
+  "/Subscribe",
   authController.protect,
-  authController.restrictTo("admin"),
-  GymController.addNewList
+  authController.restrictTo("client"),
+  ShoulderController.Subscribe
+);
+
+//Unsubscribe on a list by current client
+router.patch(
+  "/Unsubscribe",
+  authController.protect,
+  authController.restrictTo("client"),
+  ShoulderController.Unsubscribe
 );
 
 //Add new exercise by admin
 router.post(
-  "/exercise",
+  "/Exercise",
   authController.protect,
   authController.restrictTo("admin"),
-  GymController.addNewExercise
+  ShoulderController.addNewShoulderExercise
 );
 
 //update one exercise by admin
@@ -23,15 +32,15 @@ router.patch(
   "/:idExercise",
   authController.protect,
   authController.restrictTo("admin"),
-  GymController.updateOneExercise
+  ShoulderController.updateOneExercise
 );
 
 // List of exercise for admin
 router.get(
-  "/",
+  "/AllExercise",
   authController.protect,
   authController.restrictTo("admin", "client"),
-  GymController.findAllExercise
+  ShoulderController.findAllExercise
 );
 
 //delete one exercise by admin
@@ -39,7 +48,7 @@ router.delete(
   "/:idList/:idExercise",
   authController.protect,
   authController.restrictTo("admin"),
-  GymController.deleteOneExercise
+  ShoulderController.deleteOneExercise
 );
 
 // List of exercise for admin
@@ -47,7 +56,7 @@ router.get(
   "/:idExercise",
   authController.protect,
   authController.restrictTo("admin", "client"),
-  GymController.getOneExercise
+  ShoulderController.getOneExercise
 );
 
 module.exports = router;

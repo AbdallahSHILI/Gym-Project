@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const authController = require("../controllers/authController");
-const userController = require("../controllers/userController");
+const authController = require("../Controllers/authController");
+const userController = require("../Controllers/userController");
 
 //create ew compte
 router.post("/signup", authController.signup);
@@ -11,13 +11,13 @@ router.post("/login", authController.login);
 
 //get profile by current user
 router.get(
-  "/me",
+  "/Me",
   authController.protect,
   userController.getMe,
   userController.findOne
 );
 
-// List all subscriber of Abdominal by admin
+// List all client by admin
 router.get(
   "/AllClients",
   authController.protect,

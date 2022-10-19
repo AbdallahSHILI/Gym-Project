@@ -9,7 +9,7 @@ exports.getMe = (req, res, next) => {
 exports.findAllClients = async (req, res, next) => {
   try {
     // Test if there is a document
-    const doc = await User.find({ Role: client });
+    const doc = await User.find({ Role: "client" });
     return res.status(200).json({
       status: " Success",
       result: doc.length,
@@ -28,7 +28,7 @@ exports.findAllClients = async (req, res, next) => {
 exports.findOne = async (req, res, next) => {
   try {
     // Test if there is a document
-    let doc = await User.findById(req.params.idUser);
+    let doc = await User.findById(req.params.id);
     if (!doc) {
       return "No user with that id !! ";
     }
